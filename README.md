@@ -1,8 +1,8 @@
 # Password Manager (Desktop)
 
-This repository contains a JavaFX-based desktop Password Manager application.
+A small, local password manager built with JavaFX. The primary goal is simple and focused: let you save your passwords in this app with proper security.
 
-This README explains how to build, run and contribute to the project, plus a summary of functionality and troubleshooting tips so you can copy this into GitHub.
+Passwords are stored locally in an SQLite database and are encrypted with an AES key derived from your master password using PBKDF2 (HMAC-SHA256). The app never stores your master password in plaintext — only a secure PBKDF2 hash and a per-installation salt are stored. This README explains how to build, run and contribute to the project, plus a summary of functionality and troubleshooting tips for GitHub.
 
 ---
 
