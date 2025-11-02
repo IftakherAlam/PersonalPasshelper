@@ -1,0 +1,72 @@
+# Build output
+/desktop-app/target/
+**/target/
+
+# Maven / Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Local database containing sensitive data
+/passwords.db
+**/*.db
+
+# Key stores and private keys
+*.jks
+*.keystore
+*.p12
+
+# Temporary files
+tmp/
+*.tmp
+
+# Generated files
+target/
+
+# Other
+build/
+
+# Ignore IDE run configurations
+*.ipr
+
+# Ignore OS-specific files
+ehthumbs.db
+Icon?
+
+# Ignore compiled resources and caches
+*.class
+
+# If you generate docs locally
+/site/
+
+# Ignore test output and reports
+/coverage/
+
+# Add any additional developer-specific files below
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+        fx:controller="com.iftakher.passwordmanager.controllers.MainController"
+            spacing="10" style="-fx-padding: 15;" stylesheets="@../styles/main.css">
+    
+    <MenuBar>
+        <Menu text="File">
+            <MenuItem fx:id="logoutMenuItem" text="Logout" />
+            <MenuItem text="Change Master Password" onAction="#handleChangeMasterPassword" />
+            <SeparatorMenuItem />
+            <MenuItem text="Exit" onAction="#handleExit" />
+        </Menu>
+        <Menu text="Tools">
+            <MenuItem text="Password Generator" onAction="#showPasswordGenerator" />
+        </Menu>
+    </MenuBar>
+    
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Search:" />
+        <TextField fx:id="searchField" HBox.hgrow="ALWAYS" />
+    </HBox>
+    
+    <TableView fx:id="passwordsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="titleColumn" text="Title" minWidth="150" />
+            <TableColumn fx:id="usernameColumn" text="Username" minWidth="150" />
+            <TableColumn fx:id="passwordColumn" text="Password" minWidth="200" />
+            <TableColumn fx:id="websiteColumn" text="Website" minWidth="200" />
+            <TableColumn fx:id="categoryColumn" text="Category" minWidth="100" />
+        </columns>
+    </TableView>
+    
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="addButton" text="Add Password" />
+        <Button fx:id="editButton" text="Edit" />
+        <Button fx:id="deleteButton" text="Delete" />
+        <Button fx:id="exportButton" text="Export" />
+        <Button fx:id="importButton" text="Import" />
+    </HBox>
+</VBox>

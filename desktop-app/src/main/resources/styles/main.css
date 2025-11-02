@@ -1,0 +1,10 @@
+.password-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-family: monospace;
+}
+
+.password-field:focused {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-border-color: -fx-focus-color;
+}
