@@ -15,10 +15,6 @@ public class EncryptionService {
     private static final String KEY_ALGORITHM = "AES";
     private static final String PBKDF_ALGORITHM = "PBKDF2WithHmacSHA256";
     
-    static {
-        // Add Bouncy Castle provider if it's not already added
-        java.security.Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-    }
     private static final int ITERATIONS = 100000;
     private static final int KEY_LENGTH = 256;
     private static final int IV_LENGTH = 16;
@@ -38,15 +34,15 @@ public class EncryptionService {
     }
 
     public static SecretKey generateKeyFromPassword(String password, byte[] salt) 
-            throws NoSuchAlgorithmException, InvalidKeySpecException, java.security.NoSuchProviderException {
-        SecretKeyFactory factory = SecretKeyFactory.getInstance(PBKDF_ALGORITHM, "BC");
+            throws NoSuchAlgorithmException, InvalidKeySpecException {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance(PBKDF_ALGORITHM);
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, ITERATIONS, KEY_LENGTH);
         SecretKey tmp = factory.generateSecret(spec);
         return new SecretKeySpec(tmp.getEncoded(), KEY_ALGORITHM);
     }
 
     public static EncryptedData encryptData(String data, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance(ALGORITHM, "BC");
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
         byte[] iv = new byte[IV_LENGTH];
         new SecureRandom().nextBytes(iv);
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
@@ -58,7 +54,7 @@ public class EncryptionService {
     }
 
     public static String decryptData(EncryptedData encryptedData, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance(ALGORITHM, "BC");
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
         IvParameterSpec ivSpec = new IvParameterSpec(encryptedData.getIv());
         
         cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);

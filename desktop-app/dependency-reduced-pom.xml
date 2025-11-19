@@ -34,9 +34,30 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.iftakher.passwordmanager.Main</mainClass>
+                  <mainClass>com.iftakher.passwordmanager.Launcher</mainClass>
                 </transformer>
+                <transformer />
               </transformers>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/BC1024KE.SF</exclude>
+                    <exclude>META-INF/BC2048KE.SF</exclude>
+                  </excludes>
+                </filter>
+                <filter>
+                  <artifact>org.bouncycastle:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
             </configuration>
           </execution>
         </executions>
@@ -46,7 +67,7 @@
         <artifactId>jpackage-maven-plugin</artifactId>
         <version>1.6.0</version>
         <configuration>
-          <name>PasswordManager</name>
+          <name>PersonalPasshelper</name>
           <appVersion>${project.version}</appVersion>
           <vendor>Iftakher</vendor>
           <destination>target/dist</destination>
@@ -59,7 +80,7 @@
           <winMenu>true</winMenu>
           <winShortcut>true</winShortcut>
           <winPerUserInstall>false</winPerUserInstall>
-          <winMenuGroup>Iftakher</winMenuGroup>
+          <winMenuGroup>PersonalPasshelper</winMenuGroup>
           <description>A secure local password manager by Iftakher</description>
           <copyright>Copyright © 2025 Iftakher</copyright>
         </configuration>

@@ -16,7 +16,28 @@ import java.time.format.DateTimeFormatter;
 import javax.crypto.SecretKey;
 
 public class DatabaseService {
-    private static final String DB_URL = "jdbc:sqlite:passwords.db";
+    private static final String DB_NAME = "passwords.db";
+    private static final String DB_URL;
+    
+    static {
+        // Store database in user's home directory to avoid permission issues
+        String userHome = System.getProperty("user.home");
+        String appDataDir = userHome + "/.password-manager";
+        
+        // Create directory if it doesn't exist
+        try {
+            java.nio.file.Path appDataPath = java.nio.file.Paths.get(appDataDir);
+            if (!java.nio.file.Files.exists(appDataPath)) {
+                java.nio.file.Files.createDirectories(appDataPath);
+            }
+        } catch (Exception e) {
+            System.err.println("Warning: Could not create app data directory: " + e.getMessage());
+        }
+        
+        DB_URL = "jdbc:sqlite:" + appDataDir + "/" + DB_NAME;
+        System.out.println("Database location: " + appDataDir + "/" + DB_NAME);
+    }
+    
     private Connection connection;
     private byte[] masterPasswordSalt;
 
@@ -47,9 +68,15 @@ public class DatabaseService {
     private void initializeDatabase() {
         try {
             connection = DriverManager.getConnection(DB_URL);
+            if (connection == null) {
+                throw new SQLException("Failed to create database connection");
+            }
             createTables();
+            System.out.println("Database initialized successfully");
         } catch (SQLException e) {
             System.err.println("Error initializing database: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Failed to initialize database: " + e.getMessage(), e);
         }
     }
 

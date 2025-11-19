@@ -42,53 +42,61 @@ public class LoginController {
     
     @FXML
     private void handleLogin() {
-        String masterPassword = masterPasswordField.getText();
-        if (masterPassword != null && !masterPassword.trim().isEmpty() && 
-            databaseService.verifyMasterPassword(masterPassword)) {
-            try {
-                // Load main view
-                authenticated = true;
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main.fxml"));
-                Parent mainRoot = loader.load();
-                
-                // Get controller and set dependencies
-                MainController mainController = loader.getController();
-                mainController.setDatabaseService(databaseService);
-                
-                // Set the encryption key derived from master password
-                mainController.setEncryptionKey(databaseService.deriveKeyFromPassword(masterPassword));
-                
-                // Setup new stage for main window
-                Stage mainStage = new Stage();
-                mainStage.setTitle("Password Manager - Vault");
-                mainStage.setScene(new Scene(mainRoot, 800, 600));
-                mainStage.setMinWidth(600);
-                mainStage.setMinHeight(400);
-                
-                // Add icon if available
-                var iconStream = getClass().getResourceAsStream("/images/icon.png");
-                if (iconStream != null) {
-                    mainStage.getIcons().add(new Image(iconStream));
-                }
-                
-                // Show main window and close login window
-                mainStage.show();
-                stage.close();
-            } catch (Exception e) {
-                // Show error dialog
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Failed to open password manager: " + e.getMessage());
-                alert.showAndWait();
+        try {
+            String masterPassword = masterPasswordField.getText();
+            
+            // Check if password field is empty
+            if (masterPassword == null || masterPassword.trim().isEmpty()) {
+                showError("Please enter a password");
+                return;
             }
-        } else {
-            // Show error for invalid password
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Invalid master password");
-            alert.showAndWait();
+            
+            // Verify password with database
+            if (!databaseService.verifyMasterPassword(masterPassword)) {
+                showError("Invalid master password. First time? Use any password to set up.");
+                return;
+            }
+            
+            // Load main view
+            authenticated = true;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main.fxml"));
+            Parent mainRoot = loader.load();
+            
+            // Get controller and set dependencies
+            MainController mainController = loader.getController();
+            mainController.setDatabaseService(databaseService);
+            
+            // Set the encryption key derived from master password
+            mainController.setEncryptionKey(databaseService.deriveKeyFromPassword(masterPassword));
+            
+            // Setup new stage for main window
+            Stage mainStage = new Stage();
+            mainStage.setTitle("Password Manager - Vault");
+            mainStage.setScene(new Scene(mainRoot, 800, 600));
+            mainStage.setMinWidth(600);
+            mainStage.setMinHeight(400);
+            
+            // Add icon if available
+            var iconStream = getClass().getResourceAsStream("/images/icon.png");
+            if (iconStream != null) {
+                mainStage.getIcons().add(new Image(iconStream));
+            }
+            
+            // Show main window and close login window
+            mainStage.show();
+            stage.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Failed to open password manager: " + e.getMessage());
         }
+    }
+    
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -17,6 +17,7 @@
     
     <PasswordField fx:id="masterPasswordField" 
                    promptText="Master Password" 
+                   onAction="#handleLogin"
                    maxWidth="300"/>
     
     <Button fx:id="loginButton" text="Login" 
