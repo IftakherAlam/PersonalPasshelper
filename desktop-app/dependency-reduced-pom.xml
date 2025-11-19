@@ -11,7 +11,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-          <mainClass>com.yourname.passwordmanager.Main</mainClass>
+          <mainClass>com.iftakher.passwordmanager.Main</mainClass>
         </configuration>
       </plugin>
       <plugin>
@@ -40,6 +40,29 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.panteleyev</groupId>
+        <artifactId>jpackage-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <name>PasswordManager</name>
+          <appVersion>${project.version}</appVersion>
+          <vendor>Iftakher</vendor>
+          <destination>target/dist</destination>
+          <module>com.iftakher.passwordmanager/com.iftakher.passwordmanager.Main</module>
+          <runtimeImage>target/java-runtime</runtimeImage>
+          <javaOptions>
+            <option>-Dfile.encoding=UTF-8</option>
+          </javaOptions>
+          <winDirChooser>true</winDirChooser>
+          <winMenu>true</winMenu>
+          <winShortcut>true</winShortcut>
+          <winPerUserInstall>false</winPerUserInstall>
+          <winMenuGroup>Iftakher</winMenuGroup>
+          <description>A secure local password manager by Iftakher</description>
+          <copyright>Copyright © 2025 Iftakher</copyright>
+        </configuration>
       </plugin>
     </plugins>
   </build>

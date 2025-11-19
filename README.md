@@ -60,6 +60,52 @@ mvn -DskipTests=true package
 Depending on the POM, packaging may produce a jar under `target/`.
 
 
+## Creating a Windows .exe Installer
+
+To create a native Windows installer (.exe) with your name "Iftakher" in the setup:
+
+**Prerequisites for building installer:**
+- JDK 17 or higher (must include jpackage and jlink tools)
+- On Windows: WiX Toolset 3.11+ (for creating .exe installers)
+  - Download from: https://github.com/wixtoolset/wix3/releases
+  - Add WiX bin folder to your PATH
+
+**Build steps:**
+
+1) On Windows, run the build script:
+
+```cmd
+cd desktop-app
+build-installer.bat
+```
+
+2) On Linux/Mac, run:
+
+```bash
+cd desktop-app
+./build-installer.sh
+```
+
+The script will:
+- Build the JAR file with all dependencies
+- Create a custom Java runtime image (smaller distribution)
+- Package everything into a native installer
+
+**Output location:**
+- Windows: `desktop-app/target/installer/PasswordManager-1.0.0.exe`
+- Linux: `desktop-app/target/installer/passwordmanager_1.0.0_amd64.deb`
+- Mac: `desktop-app/target/installer/PasswordManager-1.0.0.dmg`
+
+**Installer features:**
+- Vendor name: "Iftakher" (shown in setup wizard)
+- Creates Start Menu shortcuts in "Iftakher" folder
+- Adds desktop shortcut
+- Standard Windows install/uninstall support
+- Includes custom Java runtime (no need for users to install Java)
+
+**Note:** The first build may take several minutes as it creates the optimized runtime image.
+
+
 ## How the app works (user flow)
 
 1. Login screen:

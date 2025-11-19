@@ -106,6 +106,35 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- jpackage plugin for creating native installers (.exe for Windows) -->
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <name>PasswordManager</name>
+                    <appVersion>${project.version}</appVersion>
+                    <vendor>Iftakher</vendor>
+                    <destination>target/dist</destination>
+                    <module>com.iftakher.passwordmanager/com.iftakher.passwordmanager.Main</module>
+                    <runtimeImage>target/java-runtime</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    
+                    <!-- Windows specific settings -->
+                    <winDirChooser>true</winDirChooser>
+                    <winMenu>true</winMenu>
+                    <winShortcut>true</winShortcut>
+                    <winPerUserInstall>false</winPerUserInstall>
+                    <winMenuGroup>Iftakher</winMenuGroup>
+                    
+                    <!-- Description -->
+                    <description>A secure local password manager by Iftakher</description>
+                    <copyright>Copyright © 2025 Iftakher</copyright>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
