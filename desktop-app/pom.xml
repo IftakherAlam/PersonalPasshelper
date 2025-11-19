@@ -113,7 +113,7 @@
                 <artifactId>jpackage-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <name>PasswordManager</name>
+                    <name>PersonalPasshelper</name>
                     <appVersion>${project.version}</appVersion>
                     <vendor>Iftakher</vendor>
                     <destination>target/dist</destination>
@@ -128,7 +128,7 @@
                     <winMenu>true</winMenu>
                     <winShortcut>true</winShortcut>
                     <winPerUserInstall>false</winPerUserInstall>
-                    <winMenuGroup>Iftakher</winMenuGroup>
+                    <winMenuGroup>PersonalPasshelper</winMenuGroup>
                     
                     <!-- Description -->
                     <description>A secure local password manager by Iftakher</description>

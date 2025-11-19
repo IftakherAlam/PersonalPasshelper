@@ -32,7 +32,7 @@ REM Step 3: Create installer with jpackage
 echo.
 echo Step 3: Creating Windows installer...
 jpackage --input target ^
-         --name "PasswordManager" ^
+         --name "PersonalPasshelper" ^
          --main-jar password-manager-desktop-1.0.0.jar ^
          --main-class com.iftakher.passwordmanager.Main ^
          --runtime-image target/java-runtime ^
@@ -40,12 +40,12 @@ jpackage --input target ^
          --type exe ^
          --vendor "Iftakher" ^
          --app-version "1.0.0" ^
-         --description "A secure local password manager" ^
+         --description "A secure local password manager by Iftakher" ^
          --copyright "Copyright (C) 2025 Iftakher" ^
          --win-dir-chooser ^
          --win-menu ^
          --win-shortcut ^
-         --win-menu-group "Iftakher"
+         --win-menu-group "PersonalPasshelper"
 
 if errorlevel 1 (
     echo Error: jpackage failed
@@ -55,6 +55,6 @@ if errorlevel 1 (
 echo.
 echo ========================================
 echo Build completed successfully!
-echo Installer location: target\installer\PasswordManager-1.0.0.exe
+echo Installer location: target\installer\PersonalPasshelper-1.0.0.exe
 echo ========================================
 pause

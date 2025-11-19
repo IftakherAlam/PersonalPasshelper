@@ -41,7 +41,7 @@ else
 fi
 
 jpackage --input target \
-         --name "PasswordManager" \
+         --name "PersonalPasshelper" \
          --main-jar password-manager-desktop-1.0.0.jar \
          --main-class com.iftakher.passwordmanager.Main \
          --runtime-image target/java-runtime \
@@ -49,7 +49,7 @@ jpackage --input target \
          --type "$INSTALLER_TYPE" \
          --vendor "Iftakher" \
          --app-version "1.0.0" \
-         --description "A secure local password manager" \
+         --description "A secure local password manager by Iftakher" \
          --copyright "Copyright (C) 2025 Iftakher"
 
 if [ $? -ne 0 ]; then

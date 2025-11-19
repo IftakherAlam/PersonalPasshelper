@@ -92,13 +92,14 @@ The script will:
 - Package everything into a native installer
 
 **Output location:**
-- Windows: `desktop-app/target/installer/PasswordManager-1.0.0.exe`
-- Linux: `desktop-app/target/installer/passwordmanager_1.0.0_amd64.deb`
-- Mac: `desktop-app/target/installer/PasswordManager-1.0.0.dmg`
+- Windows: `desktop-app/target/installer/PersonalPasshelper-1.0.0.exe`
+- Linux: `desktop-app/target/installer/personalpasshelper_1.0.0_amd64.deb`
+- Mac: `desktop-app/target/installer/PersonalPasshelper-1.0.0.dmg`
 
 **Installer features:**
-- Vendor name: "Iftakher" (shown in setup wizard)
-- Creates Start Menu shortcuts in "Iftakher" folder
+- Application name: "PersonalPasshelper" (folder name and shortcuts)
+- Vendor/Publisher: "Iftakher" (shown in setup wizard as watermark/branding)
+- Creates Start Menu shortcuts in "PersonalPasshelper" folder
 - Adds desktop shortcut
 - Standard Windows install/uninstall support
 - Includes custom Java runtime (no need for users to install Java)
