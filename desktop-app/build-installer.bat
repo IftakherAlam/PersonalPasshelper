@@ -40,7 +40,15 @@ REM Step 4: Create installer with jpackage (with bundled JRE)
 echo.
 echo Step 2: Creating Windows installer with bundled Java runtime...
 echo This may take a few minutes...
-jpackage --input target --name PersonalPasshelper --main-jar password-manager-desktop-1.0.0.jar --main-class com.iftakher.passwordmanager.Launcher --dest target\installer --type exe --vendor Iftakher --app-version 1.0.0 --description "A secure local password manager" --copyright "Copyright (C) 2025 Iftakher" --win-dir-chooser --win-menu --win-shortcut --win-menu-group PersonalPasshelper --java-options "-Dfile.encoding=UTF-8"
+
+REM Check if icon exists
+set ICON_PARAM=
+if exist "src\main\resources\icons\app-icon.ico" (
+    echo Using custom icon...
+    set ICON_PARAM=--icon src\main\resources\icons\app-icon.ico
+)
+
+jpackage --input target --name PersonalPasshelper --main-jar password-manager-desktop-1.0.0.jar --main-class com.iftakher.passwordmanager.Launcher --dest target\installer --type exe --vendor Iftakher --app-version 1.0.0 --description "A secure local password manager" --copyright "Copyright (C) 2025 Iftakher" --win-dir-chooser --win-menu --win-shortcut --win-menu-group PersonalPasshelper --java-options "-Dfile.encoding=UTF-8" %ICON_PARAM%
 
 if errorlevel 1 (
     echo Error: jpackage failed
